@@ -1,0 +1,19 @@
+# https://github.com/assimp/assimp/blob/master/Build.md
+
+trigger:
+- master
+
+pr:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: sudo apt-get install cmake
+  displayName: Install CMake
+
+- script: |
+    cmake CMakeLists.txt 
+    cmake --build .
+
