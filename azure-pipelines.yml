@@ -1,0 +1,26 @@
+# https://github.com/assimp/assimp/blob/master/Build.md
+
+name: 5.0.1-r$(rev:r)
+
+trigger:
+  branches:
+    include:
+    - v5.0.1
+
+pr:
+  branches:
+    include:
+    - v5.0.1
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+  
+- script: sudo apt-get install cmake
+  displayName: Install CMake
+
+- script: |
+    cmake CMakeLists.txt 
+    cmake --build .
