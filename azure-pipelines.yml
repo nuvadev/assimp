@@ -1,7 +1,11 @@
 # https://github.com/assimp/assimp/blob/master/Build.md
 
+name: 5.0.1-r$(rev:r)
+
 trigger:
-- master
+ tags:
+   include:
+    - v5.0.1
 
 pr:
 - master
@@ -9,7 +13,14 @@ pr:
 pool:
   vmImage: ubuntu-latest
 
+resources:
+  repositories:
+  - repository: assimp
+    type: github
+
 steps:
+- checkout: self
+  
 - script: sudo apt-get install cmake
   displayName: Install CMake
 
