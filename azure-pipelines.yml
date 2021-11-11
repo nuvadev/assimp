@@ -24,3 +24,13 @@ steps:
 - script: |
     cmake CMakeLists.txt 
     cmake --build .
+  displayName: Build
+
+- task: CopyFiles@2
+  displayName: Stage assimp
+  inputs:
+    Contents: '**/bin/**/*'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+
+- publish: $(Build.ArtifactStagingDirectory)
